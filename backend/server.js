@@ -7,9 +7,11 @@ require('dotenv').config();
 const port  = process.env.PORT || 8888;
 app.use(cors())
 
-app.get("/death", (req, res) => {
+
+app.post("/signup", (req, res) => {
   res.json("death is the new Begining")
 })
+
 
 
 app.listen(port, ()=> {
