@@ -28,12 +28,19 @@ function Signup() {
   async function register(ev) {
     ev.preventDefault();
     
-   await fetch("http://localhost:3333/signup", {
+  const response =  await fetch("http://localhost:3333/signup", {
     method: "POST",
     body: JSON.stringify({username, password}),
     headers: {"Content-Type": "application/json"}
-   })
-    
+   });
+
+  //  console.log(response)
+   if(response.status === 200) {
+    alert("Registration Done Successfully")
+   }  
+    else {
+      alert("Registration Failed")
+    }
   }
 
   return (

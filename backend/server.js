@@ -14,9 +14,15 @@ connectToMongoDb;
 
 app.post("/signup", async (req, res) => {
  const {username, password} = req.body;
-const UserDoc =  await UserModel.create({username, password})
-//  res.json({requestData: {username, password}})
-res.json(UserDoc)
+
+ try{
+  const UserDoc =  await UserModel.create({username, password})
+  //  res.json({requestData: {username, password}})
+  res.json(UserDoc)
+ } catch (err) {
+  res.status(400).json({msg: err.message})
+ }
+
 })
 
 
