@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
     <header className="flex justify-between m-8 text-black items-center ">
-      <div className="text-2xl font-bold">BlogVista</div>
+      <Link to={"/"} className="text-2xl font-bold">BlogVista</Link>
       <div className="flex justify-between gap-4 font-bold ">
-        <a href="" >Login</a>
-        <a href="">Signup</a>
+        <Link to={"/login"} >Login</Link>
+        <Link to={"/signup"}>Signup</Link>
       </div>
     </header>
   )
