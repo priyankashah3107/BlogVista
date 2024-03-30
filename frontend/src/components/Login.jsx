@@ -8,7 +8,7 @@ function Login() {
       <input type="text" placeholder="Username" className="input input-bordered w-full max-w-xs" />
       <input type="password" placeholder="Password" className="input input-bordered w-full max-w-xs" />
      
-      <button className="btn btn-active btn-neutral">SignUp</button>
+      <button className="btn btn-active btn-neutral">Login</button>
       </form>
     </div>
   )
