@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors");
 const  connectToMongoDb  = require("./db/connectToMongodb.js");
+const UserModel = require("./db/UserModel.js");
 
 // process.loadEnvFile();
 require('dotenv').config();
@@ -9,9 +10,13 @@ const port  = process.env.PORT || 8888;
 app.use(cors())
 app.use(express.json())
 
-app.post("/signup", (req, res) => {
+connectToMongoDb;
+
+app.post("/signup", async (req, res) => {
  const {username, password} = req.body;
- res.json({requestData: {username, password}})
+const UserDoc =  await UserModel.create({username, password})
+//  res.json({requestData: {username, password}})
+res.json(UserDoc)
 })
 
 

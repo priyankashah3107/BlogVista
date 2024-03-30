@@ -8,5 +8,6 @@ const connectToMongoDb = mongoose.connect(process.env.MONGO_DB_URI)
                                 .catch((err) => {
                                   console.log("Error to connecting to mongodb", err.message);
                                 })
-                                
 
+
+module.exports = connectToMongoDb;

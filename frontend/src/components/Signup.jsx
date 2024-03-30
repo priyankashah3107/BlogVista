@@ -20,12 +20,6 @@
 import React, { useState } from 'react'
 
 
-async function register(ev) {
-  ev.preventDefault();
-  
- await fetch("http://localhost:3333/")
-  
-}
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -43,7 +37,7 @@ function Signup() {
   }
 
   return (
-    <div className="flex flex-row justify-center w-[550px] h-[400px] bg-gray-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-gray-100 absolute  left-[32%] top-[22%]">
+    <div className="flex flex-row justify-center mt-[200px]">
 
       <form action="" 
          onSubmit={register}
