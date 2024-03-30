@@ -1,16 +1,12 @@
-import { useState } from 'react'
-
-import './App.css'
+import Header from './components/Header'
 
 function App() {
-  const [name, setName] = useState("Bhudda")
 
   return (
    <>
-      <button onClick={(name) => setName((name) => "SHIV")}>{name}</button>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <main className="h-full w-full bg-gray-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-gray-100">
+      <Header />
+    </main>
    </>
   )
 }
