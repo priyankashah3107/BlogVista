@@ -38,8 +38,13 @@ app.post("/login", async(req, res) => {
   try{
     const {username , password} = req.body;
     const user = await UserModel.findOne({username})
-   
-  
+    if(!user) {
+      return res.status(404).json({msg: "User not Found"})
+    } 
+    const isPasswordValid = bcrypt.compareSync(password, user.password); // true
+    if(!isPasswordValid) {
+      return res.status(404).json({msg: "Wrong password"})
+    }
     res.json(user)
   } catch(err) {
     console.log(err.message)

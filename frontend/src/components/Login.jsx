@@ -13,12 +13,11 @@ function Login() {
         body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" }
       });
-      if (response.ok) {
-        const data = await response.json();
-        // Handle successful login here
-        console.log(data); // Log the data received from the server
+      if (response.status === 200) {
+         alert("successfully Login")
+        
       } else {
-        throw new Error('Failed to login'); // Throw an error for non-OK responses
+        alert("Wrong Credentials ")
       }
     } catch (error) {
       console.error("Error:", error.message); // Log any errors that occur during login
