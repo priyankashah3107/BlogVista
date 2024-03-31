@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-
+import {Navigate} from "react-router-dom"
 function Login() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('')
- 
+   const [redirect, setRedirect] = useState(false)
 
    async function login(ev) {
     ev.preventDefault();
@@ -14,10 +14,14 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         credentials: "include"
       });
-      if (response.status === 200) {
-         alert("successfully Login")
+      // if (response.status === 200) {
+      //    alert("successfully Login")
         
-      } else {
+      // } 
+      if(response.ok) {
+        setRedirect(true)
+      }
+      else {
         alert("Wrong Credentials ")
       }
     } catch (error) {
@@ -25,7 +29,9 @@ function Login() {
     }
   }
   
-  
+  if(redirect) {
+    return <Navigate  to={'/'}/>
+  }
 
   return (
     <div className="flex flex-row justify-center mt-[200px]">

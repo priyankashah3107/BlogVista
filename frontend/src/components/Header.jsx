@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="flex justify-between m-8 text-black items-center ">
       <Link to={"/"} className="text-2xl font-bold">BlogVista</Link>
-      <div className="flex justify-between gap-4 font-bold ">
+      <div className="flex justify-between gap-10 font-bold ">
         <Link to={"/login"} >Login</Link>
         <Link to={"/signup"}>Signup</Link>
       </div>
