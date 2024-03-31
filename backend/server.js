@@ -3,6 +3,10 @@ const app = express()
 const cors = require("cors");
 const  connectToMongoDb  = require("./db/connectToMongodb.js");
 const UserModel = require("./db/UserModel.js");
+const bcrypt = require('bcryptjs');
+
+// generating a salt 
+const salt = bcrypt.genSaltSync(10);
 
 // process.loadEnvFile();
 require('dotenv').config();
@@ -14,9 +18,13 @@ connectToMongoDb;
 
 app.post("/signup", async (req, res) => {
  const {username, password} = req.body;
+ var hash = bcrypt.hashSync(password, salt);
 
  try{
-  const UserDoc =  await UserModel.create({username, password})
+  // const UserDoc =  await UserModel.create({username, password})
+  const UserDoc =  await UserModel.create({username, 
+    password: hash
+  })
   //  res.json({requestData: {username, password}})
   res.json(UserDoc)
  } catch (err) {

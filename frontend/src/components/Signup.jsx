@@ -44,11 +44,11 @@ function Signup() {
   }
 
   return (
-    <div className="flex flex-row justify-center mt-[200px]">
+    <div className="flex flex-row justify-center mt-[200px]  ">
 
       <form action="" 
          onSubmit={register}
-      className="flex flex-col gap-5 justify-center relative"
+      className="flex flex-col gap-5 justify-center relative " 
        >
 
       <input type="text" placeholder="Username" className="input input-bordered w-full max-w-xs" 
