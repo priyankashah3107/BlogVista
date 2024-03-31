@@ -34,6 +34,13 @@ app.post("/signup", async (req, res) => {
 })
 
 
+app.post("/login", (req, res) => {
+  const {username , password} = req.body;
+  const UserDoc = UserModel.findOne({username: username})
+  res.json({UserDoc})
+})
+
+
 
 app.listen(port, ()=> {
   
