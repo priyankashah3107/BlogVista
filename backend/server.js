@@ -4,14 +4,14 @@ const cors = require("cors");
 const  connectToMongoDb  = require("./db/connectToMongodb.js");
 const UserModel = require("./db/UserModel.js");
 const bcrypt = require('bcryptjs');
-
+const jwt = require("jsonwebtoken")
 // generating a salt 
 const salt = bcrypt.genSaltSync(10);
 
 // process.loadEnvFile();
 require('dotenv').config();
 const port  = process.env.PORT || 8888;
-app.use(cors())
+app.use(cors({credentials: true, origin: "http://localhost:3003"}))
 app.use(express.json())
 
 connectToMongoDb;
@@ -42,8 +42,15 @@ app.post("/login", async(req, res) => {
       return res.status(404).json({msg: "User not Found"})
     } 
     const isPasswordValid = bcrypt.compareSync(password, user.password); // true
-    if(!isPasswordValid) {
-      return res.status(404).json({msg: "Wrong password"})
+    // if(!isPasswordValid) {
+    //   return res.status(404).json({msg: "Wrong password"})
+    // }
+    if(isPasswordValid) {
+      // generating the hash 
+      jwt.sign({username, id:user._id}, process.env.JWT_SECRET, {}, (err, token) => {
+        if(err) throw err;
+        res.json(token)
+      })
     }
     res.json(user)
   } catch(err) {
