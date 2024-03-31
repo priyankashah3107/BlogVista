@@ -34,31 +34,29 @@ app.post("/signup", async (req, res) => {
 })
 
 
-app.post("/login", async(req, res) => {
-  try{
-    const {username , password} = req.body;
-    const user = await UserModel.findOne({username})
-    if(!user) {
-      return res.status(404).json({msg: "User not Found"})
-    } 
-    const isPasswordValid = bcrypt.compareSync(password, user.password); // true
-    // if(!isPasswordValid) {
-    //   return res.status(404).json({msg: "Wrong password"})
-    // }
-    if(isPasswordValid) {
-      // generating the hash 
-      jwt.sign({username, id:user._id}, process.env.JWT_SECRET, {}, (err, token) => {
-        if(err) throw err;
-        res.json(token)
-      })
+app.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await UserModel.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
     }
-    res.json(user)
-  } catch(err) {
-    console.log(err.message)
-     res.status(400).json({msg: err.message})
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ msg: "Invalid password" });
+    }
+    // Generating JWT token
+    jwt.sign({ username, id: user._id }, process.env.JWT_SECRET, (err, token) => {
+      if (err) throw err;
+      // Setting the token as a cookie
+      res.cookie('token', token).json("OK PRI");
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ msg: "Internal server error" });
   }
- 
-})
+});
+
 
 
 
