@@ -34,10 +34,18 @@ app.post("/signup", async (req, res) => {
 })
 
 
-app.post("/login", (req, res) => {
-  const {username , password} = req.body;
-  const UserDoc = UserModel.findOne({username: username})
-  res.json({UserDoc})
+app.post("/login", async(req, res) => {
+  try{
+    const {username , password} = req.body;
+    const user = await UserModel.findOne({username})
+   
+  
+    res.json(user)
+  } catch(err) {
+    console.log(err.message)
+     res.status(400).json({msg: err.message})
+  }
+ 
 })
 
 

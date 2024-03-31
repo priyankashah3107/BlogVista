@@ -4,15 +4,27 @@ function Login() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('')
  
+
    async function login(ev) {
     ev.preventDefault();
-   await fetch("http://localhost:3003/login", {
-      method: "POST",
-      body: JSON.stringify({username, password}),
-      headers: {"Content-Type": "application/json"}
-    })
-}
-   
+    try {
+      const response = await fetch("http://localhost:3333/login", {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Handle successful login here
+        console.log(data); // Log the data received from the server
+      } else {
+        throw new Error('Failed to login'); // Throw an error for non-OK responses
+      }
+    } catch (error) {
+      console.error("Error:", error.message); // Log any errors that occur during login
+    }
+  }
+  
   
 
   return (
