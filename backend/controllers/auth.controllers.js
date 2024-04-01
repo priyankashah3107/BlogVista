@@ -81,3 +81,7 @@ export const profile = (req, res) => {
     res.clearCookie('token').json("Hello Universe")
   }
   
+
+  export const create = (req, res) => {
+    res.json("Hello")
+  }
