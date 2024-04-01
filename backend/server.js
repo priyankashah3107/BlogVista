@@ -7,12 +7,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken")
 // generating a salt 
 const salt = bcrypt.genSaltSync(10);
+const cookieParser = require("cookie-parser")
 
 // process.loadEnvFile();
 require('dotenv').config();
 const port  = process.env.PORT || 8888;
 app.use(cors({credentials: true, origin: "http://localhost:3003"}))
 app.use(express.json())
+app.use(cookieParser())
 
 connectToMongoDb;
 
@@ -58,6 +60,21 @@ app.post("/login", async (req, res) => {
 });
 
 
+app.get("/profile", (req, res) => {
+   res.json(req.cookies)
+})
+
+
+// app.get("/profile", (req, res) => {
+//   const token = req.cookies.token; // Access the 'token' cookie
+//   if (!token) {
+//     return res.status(401).json({ msg: "Unauthorized" });
+//   }
+
+//   // You can decode and verify the JWT token here if needed
+
+//   res.json({ msg: "Profile accessed successfully" });
+// });
 
 
 app.listen(port, ()=> {
