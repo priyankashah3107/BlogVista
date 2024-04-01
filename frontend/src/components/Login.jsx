@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import {Navigate} from "react-router-dom"
+import useUserInfo from '../context/UserContext';
 function Login() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('')
    const [redirect, setRedirect] = useState(false)
-
+     const {userInfo, setUserInfo}  =    useUserInfo()
    async function login(ev) {
     ev.preventDefault();
     try {
@@ -19,7 +20,11 @@ function Login() {
         
       // } 
       if(response.ok) {
-        setRedirect(true)
+         response.json().then(userInfomation => {
+          setUserInfo(userInfomation)
+          setRedirect(true)
+         })
+        
       }
       else {
         alert("Wrong Credentials ")

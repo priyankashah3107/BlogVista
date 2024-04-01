@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import useUserInfo from '../context/UserContext';
 
 function Header() {
-  const [username, setUsername] = useState(null)
+  // const [username, setUsername] = useState(null)
+  const {userInfo, setUserInfo}  = useUserInfo()
   useEffect(()=>  {
     fetch("http://localhost:3333/profile", {
       credentials: "include"
     }).then(response => {
        response.json().then(userInfo => {
-         setUsername(userInfo.username)
+        //  setUsername(userInfo.username)
+        setUserInfo(userInfo)
        })
     })
   }, []);
@@ -17,8 +20,17 @@ function Header() {
      fetch("http://localhost:3333/logout", {
       credentials: "include", 
       method: "POST"
+     }).then(response => {
+        if(response.ok) {
+          // setUsername(null)
+          setUserInfo(null)
+        }
+     }).catch(err => {
+       console.error("Unable to Logout", err.message)
      })
   }
+   
+  const username  = userInfo?.username
 
   return (
     <header className="flex justify-between m-8 text-black items-center ">

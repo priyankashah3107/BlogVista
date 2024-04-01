@@ -51,7 +51,10 @@ app.post("/login", async (req, res) => {
     jwt.sign({ username, id: user._id }, process.env.JWT_SECRET, (err, token) => {
       if (err) throw err;
       // Setting the token as a cookie
-      res.cookie('token', token).json("OK PRI");
+      res.cookie('token', token).json({
+        id:user._id,
+        username
+      });
     });
   } catch (error) {
     console.error(error.message);
@@ -89,8 +92,8 @@ app.get("/profile", (req, res) => {
 
 
 app.post("/logout", (req, res) => {
-   res.cookie('token', '').json("OK hai")
-})
+  res.clearCookie('token').json("Hello Universe")
+}) 
 
 app.listen(port, ()=> {
   
