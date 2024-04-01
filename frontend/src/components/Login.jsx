@@ -5,8 +5,9 @@ function Login() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('')
    const [redirect, setRedirect] = useState(false)
-     const {userInfo, setUserInfo}  =    useUserInfo()
-   async function login(ev) {
+     const {setUserInfo}  =    useUserInfo()
+
+  async function login(ev) {
     ev.preventDefault();
     try {
       const response = await fetch("http://localhost:3333/login", {
@@ -19,15 +20,16 @@ function Login() {
       //    alert("successfully Login")
         
       // } 
-      if(response.ok) {
+      if(response.status === 200) {
          response.json().then(userInfomation => {
           setUserInfo(userInfomation)
           setRedirect(true)
          })
         
-      }
-      else {
-        alert("Wrong Credentials ")
+      }else if (response.status === 401) {
+        alert("Wrong Credentials");
+      } else {
+        alert("Login Failed. Please try again later.");
       }
     } catch (error) {
       console.error("Error:", error.message); // Log any errors that occur during login
