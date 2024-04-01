@@ -88,6 +88,10 @@ app.get("/profile", (req, res) => {
 // });
 
 
+app.post("/logout", (req, res) => {
+   res.cookie('token', '').json("OK hai")
+})
+
 app.listen(port, ()=> {
   
   // console.log(`App is running in PORT http://localhost:${port}`, process.env.PORT)

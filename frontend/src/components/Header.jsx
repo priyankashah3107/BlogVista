@@ -13,6 +13,13 @@ function Header() {
     })
   }, []);
 
+  function logout() {
+     fetch("http://localhost:3333/logout", {
+      credentials: "include", 
+      method: "POST"
+     })
+  }
+
   return (
     <header className="flex justify-between m-8 text-black items-center ">
       <Link to={"/"} className="text-2xl font-bold">BlogVista</Link>
@@ -20,7 +27,7 @@ function Header() {
        {username && (
         <> 
         <Link to={'/create'}>Create Blog</Link>
-        <a href="">Logout</a>
+        <a onClick={logout}>Logout</a>
         </>
        )}
        {!username && (
