@@ -61,8 +61,19 @@ app.post("/login", async (req, res) => {
 
 
 app.get("/profile", (req, res) => {
-   res.json(req.cookies)
-})
+  const {token} = req.cookies
+   if(!token) {
+    return res.status(401).json({msg: "Unauthorized Token"})
+   }
+   // JWt Verification 
+   jwt.verify(token, process.env.JWT_SECRET, (err, info) => {
+      if(err) {
+        console.error(err.message)
+        return res.status(401).json({msg: "Invalid Token"})
+      } 
+      res.json(info)
+   })
+});
 
 
 // app.get("/profile", (req, res) => {
