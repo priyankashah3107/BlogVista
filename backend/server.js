@@ -24,6 +24,7 @@ import fs from "fs"
 
 const uploadMiddleware = multer({ dest: 'uploads/' });
 import dotenv from 'dotenv';
+import Post from "./db/Post.js";
 dotenv.config();
 
 const app = express()
@@ -131,6 +132,10 @@ app.post('/post', uploadMiddleware.single('file') , (req, res) => {
   //  fs.renameSync(path, path+'.'+findext)
    fs.renameSync(path, IMG)
    res.json({findext, IMG}) 
+
+   Post.create({
+    
+   })
    
 }) 
 
