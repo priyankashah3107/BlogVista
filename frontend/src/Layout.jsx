@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 
 function Layout() {
   return (
-    <main className={`h-screen w-full bg-gray-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-gray-100`}>
+    <main className={``}>
       <Header />
       <Outlet />
     </main>
