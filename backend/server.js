@@ -120,7 +120,7 @@ connectToMongoDb;
 
 app.use('/', authRoutes )
 
-app.post('/post', uploadMiddleware.single('file') , (req, res) => {
+app.post('/post', uploadMiddleware.single('file') , async (req, res) => {
     // res.json(req.files)
     // res.json({files: req.file})
     // finding the extention of the image which we we uploading 
@@ -134,11 +134,16 @@ app.post('/post', uploadMiddleware.single('file') , (req, res) => {
   //  res.json({findext, IMG}) 
     
    const {title, metaData, value } = req.body
-  //  Post.create({
+  const PostInfo =  await Post.create({
+     title,
+     metaData,
+     value,
+     cover:IMG
 
-  //  })
+   })
 
-  res.json({title, metaData, value})
+  // res.json({title, metaData, value})
+  res.json({msg: PostInfo})
    
 }) 
 

@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { styles } from '../../style.js';
+import { Navigate } from 'react-router-dom';
 function CreatePost() {
   const [value, setValue] = useState('');
   const[title, setTitle] = useState("");
   const [metaData, setMetaData] = useState("") 
   const[files, setFiles] = useState('')
+  const[redirect, setRedirect] = useState(false)
 
   async function handleSubmit(ev) { 
     ev.preventDefault();
@@ -27,12 +29,14 @@ function CreatePost() {
     }) 
 
     if(response.status === 200) {
-      
+       setRedirect(true)
     } 
-    else {
-
-    }
+   
   } 
+
+  if(redirect) {
+    return <Navigate  to={'/'}/>
+  }
   
   
   const toolbarOptions = [
