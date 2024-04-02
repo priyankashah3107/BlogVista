@@ -18,6 +18,7 @@ import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import authRoutes from './routes/auth.routes.js';
+import createPost  from "./controllers/createpost.controllers.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -113,7 +114,7 @@ connectToMongoDb;
 
 
 app.use('/', authRoutes )
-
+app.use('/', createPost)
 
 
 

@@ -82,6 +82,6 @@ export const profile = (req, res) => {
   }
   
 
-  export const create = (req, res) => {
-    res.json("Hello")
-  }
+  // export const create = (req, res) => {
+  //   res.json("Hello")
+  // }
