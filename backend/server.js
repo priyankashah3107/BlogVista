@@ -38,6 +38,7 @@ app.use(cookieParser())
 
 connectToMongoDb;
 
+
 // app.post("/signup", async (req, res) => {
 //  const {username, password} = req.body;
 //  var hash = bcrypt.hashSync(password, salt);
@@ -146,6 +147,12 @@ app.post('/post', uploadMiddleware.single('file') , async (req, res) => {
   res.json({msg: PostInfo})
    
 }) 
+
+
+app.get("/post", async(req, res) => {
+  const posts = await Post.find()
+  res.json(posts)
+})
 
 
 
