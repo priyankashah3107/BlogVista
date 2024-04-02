@@ -9,14 +9,28 @@ function CreatePost() {
   const [metaData, setMetaData] = useState("") 
   const[files, setFiles] = useState('')
 
-  function handleSubmit(ev) {
+  async function handleSubmit(ev) {
     const data = new FormData()
     data.set("title", title)
     data.set("metaData", metaData)
-    // data.set('file', files[0])
-    console.log(files)
+    data.set('file', files[0])
+    // console.log(files)
     ev.preventDefault()
-  }
+ const response =   await fetch("http://localhost:3333/post", {
+      method: "POST",
+      body: data
+
+    }) 
+
+    if(response.status === 200) {
+      
+    } 
+    else {
+      
+    }
+  } 
+  
+  
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
     ['blockquote', 'code-block'],

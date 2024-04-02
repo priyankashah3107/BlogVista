@@ -19,6 +19,9 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import authRoutes from './routes/auth.routes.js';
 import createPost  from "./controllers/createpost.controllers.js";
+import multer from 'multer';
+
+const uploadMiddleware = multer({ dest: 'uploads/' });
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -114,7 +117,17 @@ connectToMongoDb;
 
 
 app.use('/', authRoutes )
-app.use('/', createPost)
+
+app.post('/post', uploadMiddleware.single('file') , (req, res) => {
+    // res.json(req.files)
+    // res.json({files: req.file})
+    // finding the extention of the image which we we uploading 
+
+    const {originalname} = req.file;
+   const parts =   originalname.split('.');
+   const findext = parts[parts.length - 1];
+   res.json({findext})
+}) 
 
 
 
