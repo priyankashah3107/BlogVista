@@ -9,13 +9,17 @@ function CreatePost() {
   const [metaData, setMetaData] = useState("") 
   const[files, setFiles] = useState('')
 
-  async function handleSubmit(ev) {
+  async function handleSubmit(ev) { 
+    ev.preventDefault();
+    setValue(value)
+
     const data = new FormData()
+    data.set("value", value)
     data.set("title", title)
     data.set("metaData", metaData)
     data.set('file', files[0])
     // console.log(files)
-    ev.preventDefault()
+   
  const response =   await fetch("http://localhost:3333/post", {
       method: "POST",
       body: data
@@ -26,7 +30,7 @@ function CreatePost() {
       
     } 
     else {
-      
+
     }
   } 
   
@@ -61,6 +65,7 @@ function CreatePost() {
     <>  
     <form action="" onSubmit={handleSubmit}>
     <div  className='box-border m-8'>
+      
      <input type="text" placeholder='Title'
       className={`${`w-full h-12 border p-5`} ${styles.border} ${styles.rounded}`}
 

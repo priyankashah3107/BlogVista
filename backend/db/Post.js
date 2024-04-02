@@ -4,7 +4,7 @@ import { Schema, model } from "mongoose";
 const PostSchema = new Schema({
   title: String,
   metaData: String,
-  content: String,
+  value: String,
   cover: String
 }, {
     timestamps: true

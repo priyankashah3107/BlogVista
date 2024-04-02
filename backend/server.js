@@ -131,11 +131,14 @@ app.post('/post', uploadMiddleware.single('file') , (req, res) => {
    const IMG = path+'.'+findext
   //  fs.renameSync(path, path+'.'+findext)
    fs.renameSync(path, IMG)
-   res.json({findext, IMG}) 
-
-   Post.create({
+  //  res.json({findext, IMG}) 
     
-   })
+   const {title, metaData, value } = req.body
+  //  Post.create({
+
+  //  })
+
+  res.json({title, metaData, value})
    
 }) 
 
