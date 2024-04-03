@@ -37,7 +37,7 @@ function Post({title, metaData, value, cover, createdAt, author, _id
     <div className="post m-8 flex flex-col gap-5text-start mt-20">
       <div className="flex flex-col sm:flex-row gap-1">
         
-        <div className=''>
+        <div>
          <Link to={`/post/${_id}`}>
          <img src={'http://localhost:3333/'+cover} alt="image" className="w-[750px] h-[200px] rounded-lg   " />
 
