@@ -9,6 +9,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import CreatePost from './components/CreatePost'
 import { UserContextProvider } from './context/UserContext.jsx'
+import SinglePost from './components/SinglePost.jsx'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/create' element={<CreatePost />} />
+          <Route path='/post/:postId' element={<SinglePost />}></Route>
         </Route>
       </Routes>
      </UserContextProvider>

@@ -102,6 +102,12 @@ app.get("/post", async(req, res) => {
   res.json(posts)
 })
 
+app.get('/post/:id', async(req, res) => {
+   const {id} = req.params;
+  //  res.json(id)
+  const postInfo = await Post.findById(id).populate('author', ['username'])
+  res.json(postInfo)
+})
 
 
 app.listen(port, ()=> {

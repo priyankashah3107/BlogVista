@@ -27,7 +27,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-function Post({title, metaData, value, cover, createdAt, author
+function Post({title, metaData, value, cover, createdAt, author, _id
 }) {
 
   const postingDate = new Date()
@@ -38,14 +38,17 @@ function Post({title, metaData, value, cover, createdAt, author
       <div className="flex flex-col sm:flex-row gap-1">
         
         <div className=''>
-         <Link >
+         <Link to={`/post/${_id}`}>
          <img src={'http://localhost:3333/'+cover} alt="image" className="w-[750px] h-[200px] rounded-lg   " />
 
          </Link>
         </div>
 
         <div className=" pl-4 sm:pl-0 pt-4 sm:pt-0 flex flex-col ml-10 ">
+          <Link to={`/post/${_id}`}>
           <h2 className="font-bold text-4xl">{title}</h2>
+          </Link>
+          
           <div className="flex gap-3 mt-3">
             <h5 className="font-bold">{author.username}</h5>
             <time>{createdAt}</time>
