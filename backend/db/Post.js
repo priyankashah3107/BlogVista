@@ -5,7 +5,8 @@ const PostSchema = new Schema({
   title: {type: String, require: true},
   metaData: {type: String, require: true},
   value: {type: String, require: true},
-  cover: String
+  cover: String,
+  author: {type: Schema.Types.ObjectId, ref: 'User'},
 }, {
     timestamps: true
 });

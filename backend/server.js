@@ -40,24 +40,53 @@ app.post('/post', uploadMiddleware.single('file') , async (req, res) => {
   //  fs.renameSync(path, path+'.'+findext)
    fs.renameSync(path, IMG)
   //  res.json({findext, IMG}) 
-    
-   const {title, metaData, value } = req.body
+   
+  const {token} = req.cookies
+  if(!token) {
+   return res.status(401).json({msg: "Unauthorized Token"})
+  }
+
+  // JWt Verification 
+  jwt.verify(token, process.env.JWT_SECRET,  async (err, info) => {
+     if(err) {
+       console.error(err.message)
+       return res.status(401).json({msg: "Invalid Token"})
+     }
+     
+        const {title, metaData, value } = req.body
   const PostInfo =  await Post.create({
      title,
      metaData,
      value,
-     cover:IMG
+     cover:IMG,
+     author: info.id,
 
    })
 
   // res.json({title, metaData, value})
   res.json({msg: PostInfo})
+     
+    //  res.json(info)
+  })
+
+    
+  //  const {title, metaData, value } = req.body
+  // const PostInfo =  await Post.create({
+  //    title,
+  //    metaData,
+  //    value,
+  //    cover:IMG
+
+  //  })
+
+  // // res.json({title, metaData, value})
+  // res.json({msg: PostInfo})
    
 }) 
 
 
 app.get("/post", async(req, res) => {
-  const posts = await Post.find()
+  const posts = await Post.find().populate('author', ['username'])
   res.json(posts)
 })
 

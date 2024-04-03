@@ -26,7 +26,7 @@
 
 import React from 'react';
 import { format } from 'date-fns';
-function Post({title, metaData, value, cover, createdAt 
+function Post({title, metaData, value, cover, createdAt, author
 }) {
 
   const postingDate = new Date()
@@ -39,7 +39,7 @@ function Post({title, metaData, value, cover, createdAt
         <div className="content pl-4 sm:pl-0 pt-4 sm:pt-0 flex-grow">
           <h2 className="font-bold text-4xl">{title}</h2>
           <div className="flex gap-3 mt-3">
-            <h5 className="font-bold">Priyanka</h5>
+            <h5 className="font-bold">{author.username}</h5>
             <time>{createdAt}</time>
           </div>
           <p className="mt-6 text-2xl">
