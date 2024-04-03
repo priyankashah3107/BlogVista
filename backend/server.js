@@ -15,6 +15,7 @@ import dotenv from 'dotenv';
 import Post from "./db/Post.js";
 dotenv.config();
 
+import path from "path";
 const app = express()
 
 // process.loadEnvFile();
@@ -23,10 +24,13 @@ const port  = process.env.PORT || 8888;
 app.use(cors({credentials: true, origin: "http://localhost:3003"}))
 app.use(express.json())
 app.use(cookieParser())
+const __dirname = path.dirname(new URL("http://localhost:3333").pathname);
+app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); 
 
 connectToMongoDb;
 
 app.use('/', authRoutes )
+
 
 app.post('/post', uploadMiddleware.single('file') , async (req, res) => {
     // res.json(req.files)
@@ -86,7 +90,11 @@ app.post('/post', uploadMiddleware.single('file') , async (req, res) => {
 
 
 app.get("/post", async(req, res) => {
-  const posts = await Post.find().populate('author', ['username'])
+  const posts = await Post.find()
+                .populate('author', ['username'])
+                .sort({createdAt: -1})
+                .limit(20)
+
   res.json(posts)
 })
 

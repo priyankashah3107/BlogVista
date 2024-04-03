@@ -35,7 +35,7 @@ function Post({title, metaData, value, cover, createdAt, author
   return (
     <div className="post m-8 flex flex-col gap-5 text-start mt-20">
       <div className="flex flex-col sm:flex-row gap-10">
-        <img src="ai.png" alt="image" className="w-full sm:w-1/2 rounded-lg md:w-1/2 lg:w-1/4  " />
+        <img src={'http://localhost:3333'+cover} alt="image" className="w-full sm:w-1/2 rounded-lg md:w-1/2 lg:w-1/4  " />
         <div className="content pl-4 sm:pl-0 pt-4 sm:pt-0 flex-grow">
           <h2 className="font-bold text-4xl">{title}</h2>
           <div className="flex gap-3 mt-3">
