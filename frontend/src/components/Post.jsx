@@ -25,9 +25,13 @@
 
 
 import React from 'react';
-
-function Post({title, metaData, value, cover, createdAt
+import { format } from 'date-fns';
+function Post({title, metaData, value, cover, createdAt 
 }) {
+
+  const postingDate = new Date()
+  createdAt = format(postingDate, 'MMMM do, yyyy')
+  // createdAt = format(postingDate, 'yyyy-MM-dd')
   return (
     <div className="post m-8 flex flex-col gap-5 text-start mt-20">
       <div className="flex flex-col sm:flex-row gap-10">
@@ -36,7 +40,7 @@ function Post({title, metaData, value, cover, createdAt
           <h2 className="font-bold text-4xl">{title}</h2>
           <div className="flex gap-3 mt-3">
             <h5 className="font-bold">Priyanka</h5>
-            <p>3/30/2024</p>
+            <time>{createdAt}</time>
           </div>
           <p className="mt-6 text-2xl">
            {metaData}

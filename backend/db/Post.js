@@ -2,9 +2,9 @@
 import { Schema, model } from "mongoose";
 
 const PostSchema = new Schema({
-  title: String,
-  metaData: String,
-  value: String,
+  title: {type: String, require: true},
+  metaData: {type: String, require: true},
+  value: {type: String, require: true},
   cover: String
 }, {
     timestamps: true
