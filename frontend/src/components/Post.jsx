@@ -27,6 +27,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+
 function Post({title, metaData, value, cover, createdAt, author, _id
 }) {
 
@@ -39,7 +40,7 @@ function Post({title, metaData, value, cover, createdAt, author, _id
         
         <div>
          <Link to={`/post/${_id}`}>
-         <img src={'http://localhost:3333/'+cover} alt="image" className="w-[750px] h-[200px] rounded-lg   " />
+         <img src={'http://localhost:3333/'+cover} alt="image" className=" w-64 h-24 rounded-lg   " />
 
          </Link>
         </div>
