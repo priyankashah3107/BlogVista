@@ -39,14 +39,14 @@ function Header() {
       <div className="flex justify-between gap-10 font-bold ">
        {username && (
         <> 
-        <Link to={'/create'} className={`${styles.Btn} `}>Create Blog</Link>
-        <a onClick={logout} className={`${styles.Btn} bg-gray-600`}>Logout</a>
+        <Link to={'/create'} className={`${styles.Btn} bg-gray-800 p-2 `}>Create Blog</Link>
+        <a onClick={logout} className={`${styles.Btn} bg-gray-500 p-2`}>Logout</a>
         </>
        )}
        {!username && (
         <>
-         <Link to={"/login"} className={`${styles.Btn} bg-gray-600`}>Login</Link>
-        <Link to={"/signup"} className={`${styles.Btn}  `}>Signup</Link>
+         <Link to={"/login"} className={`${styles.Btn} bg-gray-500 p-2`}>Login</Link>
+        <Link to={"/signup"} className={`${styles.Btn} bg-gray-800 p-2 `}>Signup</Link>
         </>
        )}
        
