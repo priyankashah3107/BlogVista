@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 
 function EditPost() {
-   const {id} = useParams()
+   const {postId} = useParams()
   const [value, setValue] = useState('');
   const[title, setTitle] = useState("");
   const [metaData, setMetaData] = useState("") 
@@ -16,7 +16,7 @@ function EditPost() {
 
 
   useEffect(() => {
-    fetch("http://localhost:3333/post/"+id) 
+    fetch("http://localhost:3333/post/"+postId) 
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -32,7 +32,7 @@ function EditPost() {
         console.error('Error fetching data:', error);
         // Handle error here, e.g., set state to indicate fetch error
       });
-  }, [id]);
+  }, [postId]);
   
 
   async function handleSubmit(ev) { 
