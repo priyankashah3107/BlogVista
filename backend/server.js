@@ -77,20 +77,10 @@ app.post('/post', uploadMiddleware.single('file') , async (req, res) => {
     //  res.json(info)
   })
 
-    
-  //  const {title, metaData, value } = req.body
-  // const PostInfo =  await Post.create({
-  //    title,
-  //    metaData,
-  //    value,
-  //    cover:IMG
-
-  //  })
-
-  // // res.json({title, metaData, value})
-  // res.json({msg: PostInfo})
    
 }) 
+
+
 
 
 app.get("/post", async(req, res) => {
@@ -100,6 +90,49 @@ app.get("/post", async(req, res) => {
                 .limit(20)
 
   res.json(posts)
+})
+
+
+app.put("/post", uploadMiddleware.single('file'), async (req, res) =>  {
+  let IMG = null
+  if(req. file) {
+    const {originalname, path } = req.file;
+    const parts =   originalname.split('.');
+    const findext = parts[parts.length - 1];
+      IMG = path+'.'+findext
+    fs.renameSync(path, IMG)
+  }
+
+  const {token } = req.cookies
+  if(!token) {
+    return res.status(401).json({msg: "Unauthorized Token"})
+   } 
+
+   jwt.verify(token, process.env.JWT_SECRET,  async (err, info) => {
+    if(err) {
+      console.error(err.message)
+      return res.status(401).json({msg: "Invalid Token"})
+    }
+    
+    const {title, metaData, value, postId} = req.body
+    const PostDoc = await Post.findById(postId);
+    const isAuthor = JSON.stringify(PostDoc.author) === JSON.stringify(info.id);
+    // res.json(isAuthor)
+  
+    if(!isAuthor) {
+      return res.status(400).json({msg: "You are not thr author"})
+    }
+
+    await PostDoc.updateOne({
+      title,
+      metaData,
+      value,
+      cover: IMG ? IMG : PostDoc.cover,
+    })
+    
+   res.json(PostDoc)
+ })
+  
 })
 
 app.get('/post/:id', async(req, res) => {

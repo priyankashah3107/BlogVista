@@ -37,12 +37,33 @@ function EditPost() {
 
   async function handleSubmit(ev) { 
     ev.preventDefault();
-    setValue(value)
+    // setValue(value)
+
+    const data = new FormData()
+    data.set("value", value)
+    data.set("title", title)
+    data.set("metaData", metaData)
+    data.set("postId", postId)
+    if(files?.[0]) {
+      data.set('file', files?.[0])
+    }
+    
+    // console.log(files)
+   
+ const response =   await fetch("http://localhost:3333/post", {
+      method: "PUT",
+      body: data,
+      credentials: 'include'
+    });
+    if(response.status === 200) {
+      setRedirect(true) 
+    }
+   
   }
 
 
   if(redirect) {
-    return <Navigate  to={'/'}/>
+    return <Navigate  to={`/post/${postId}`}/>
   }
   
     
