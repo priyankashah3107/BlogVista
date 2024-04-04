@@ -23,7 +23,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/create' element={<CreatePost />} />
           <Route path='/post/:postId' element={<SinglePost />}></Route>
-          <Route path='/edit/:editId' element={<EditPost />} />
+          <Route path='/edit/:id' element={<EditPost />} />
         </Route>
       </Routes>
      </UserContextProvider>
